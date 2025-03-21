@@ -1,7 +1,14 @@
-@extends("layout")
+{{-- @extends("layout")
 
 @section("content")
 <h1>Home page</h1>
 
 
-@endsection
+@endsection --}}
+
+<x-layout>
+    <h1>Home page</h1>
+
+
+    <x-bottom-banner />
+</x-layout>

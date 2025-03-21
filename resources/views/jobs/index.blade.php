@@ -1,9 +1,9 @@
-@extends("layout")
+{{-- @extends("layout") --}}
 
-@section("content")
+{{-- @section("content") --}}
 
     {{-- FORMA DE IMPRIMIR VARIABLES CON BLADE --}}
-    <h1>{{$title}}</h1>
+    {{-- <h1>{{$title}}</h1> --}}
     
 {{-- FORMA 1 DE USAR CICLOS PARA IMPRIMIR INFORMACION DE FORMA CONDICIONAL --}}
     {{-- @if(!empty($jobs)) --}}
@@ -22,17 +22,17 @@
     
     {{-- @endif --}}
 
-    <ul>
-        @forelse ($jobs as $job )
-            <li>{{$loop -> index}}  {{$job}}</li>
+    {{-- <ul> --}}
+        {{-- @forelse ($jobs as $job ) --}}
+            {{-- <li>{{$loop -> index}}  {{$job}}</li> --}}
             
-        @empty
-            <p>No jobs available</p
-        @endforelse
+        {{-- @empty --}}
+            {{-- <p>No jobs available</p --}}
+        {{-- @endforelse --}}
         
-    </ul>
+    {{-- </ul> --}}
 
-@endsection
+{{-- @endsection --}}
 
 {{-- 
 FORMA DE IMPRIMIR VARIABLES CON PHP PURO 
@@ -45,3 +45,18 @@ FORMA DE IMPRIMIR VARIABLES CON PHP PURO
     
 < endforeach; ?>
 </ul> --}}
+
+<x-layout>
+    <x-slot name="title">Create Job</x-slot>
+    <h1>{{$title}}</h1>
+
+
+ @forelse ($jobs as $job )
+            <li>{{$loop -> index}}  {{$job}}</li>
+            
+        @empty
+            <p>No jobs available</p
+@endforelse
+        
+
+</x-layout>
