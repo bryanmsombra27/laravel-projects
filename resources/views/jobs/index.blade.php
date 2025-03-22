@@ -52,7 +52,13 @@ FORMA DE IMPRIMIR VARIABLES CON PHP PURO
 
 
  @forelse ($jobs as $job )
-            <li>{{$loop -> index}}  {{$job}}</li>
+            <li>
+                    <a href="{{route("jobs.show",$job -> id) }}">
+                        {{$loop -> index}}  {{$job -> title }} -  {{$job -> description }}
+
+                        
+                    </a>
+            </li>
             
         @empty
             <p>No jobs available</p

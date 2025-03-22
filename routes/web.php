@@ -37,7 +37,7 @@ Route::get('/', function () {
 
 // SEPARANDO LA FUNCIONALIDAD  HACIA EL CONTROLADOR
 Route::get("/",[HomeController::class,"index"]) -> name("home.index");
-Route::get("/jobs",[JobController::class,"index"]) -> name("jobs");
+Route::get("/jobs",[JobController::class,"index"]) -> name("jobs.index");
 Route::get("/jobs/create",[JobController::class,"create"]) -> name("jobs.create");
 Route::post("/jobs",[JobController::class,"store"]) -> name("jobs.store");
 // COLOCAR LOS PARAMETROS AL FINAL

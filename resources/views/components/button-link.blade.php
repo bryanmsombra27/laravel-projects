@@ -7,7 +7,7 @@
   ])
 
 <a
-:href="url($url)"
+href="{{url($url)}}"
 class="{{$bgClass}} hover:{{$hoverClass}} {{$textClass}}  px-4 py-2 rounded hover:shadow-md transition duration-300 {{$block ? 'block':''}} "
 >
 @if ($icon)
