@@ -40,8 +40,14 @@ Route::get("/",[HomeController::class,"index"]) -> name("home.index");
 Route::get("/jobs",[JobController::class,"index"]) -> name("jobs.index");
 Route::get("/jobs/create",[JobController::class,"create"]) -> name("jobs.create");
 Route::post("/jobs",[JobController::class,"store"]) -> name("jobs.store");
+
 // COLOCAR LOS PARAMETROS AL FINAL
-Route::get("/jobs/{id}",[JobController::class,"show"]) -> name("jobs.show");
+Route::get("/jobs/{job}",[JobController::class,"show"]) -> name("jobs.show");
+
+Route::get("/jobs/{job}/edit",[JobController::class,"edit"]) -> name("jobs.edit");
+
+Route::put("/jobs/{job} ",[JobController::class,"update"]) -> name("jobs.update");
+Route::delete("/jobs/{job} ",[JobController::class,"destroy"]) -> name("jobs.destroy");
 
 
 

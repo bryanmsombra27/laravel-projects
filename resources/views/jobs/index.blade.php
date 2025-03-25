@@ -47,22 +47,18 @@ FORMA DE IMPRIMIR VARIABLES CON PHP PURO
 </ul> --}}
 
 <x-layout>
-    <x-slot name="title">Create Job</x-slot>
-    <h1>{{$title}}</h1>
 
+    <div class="grid grid-cols-1 gap-4 mb-6 md:grid-cols-3">
+        @forelse ($jobs as $job )
+        <x-job-card  :job="$job" />
 
- @forelse ($jobs as $job )
-            <li>
-                    <a href="{{route("jobs.show",$job -> id) }}">
-                        {{$loop -> index}}  {{$job -> title }} -  {{$job -> description }}
-
-                        
-                    </a>
-            </li>
-            
         @empty
             <p>No jobs available</p
 @endforelse
+
+    </div>
+
+
         
 
 </x-layout>
