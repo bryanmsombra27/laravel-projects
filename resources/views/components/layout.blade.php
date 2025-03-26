@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title ?? "Workopia | Find lists Jobs" }}</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+/>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     @vite('resources/css/app.css')
 </head> 
@@ -24,11 +30,11 @@
     <main class="container mx-auto p-4 mt-4">
 {{-- display alert messages --}}
         @if (session('success'))
-        <x-alert  type="success" message="{{session('success')}}" />
+        <x-alert  type="success" message="{{session('success')}}" timeout="2000" />
         @endif
 
         @if (session('error'))
-        <x-alert  type="error" message="{{session('error')}}" />
+        <x-alert  type="error" message="{{session('error')}}" timeout="2000" />
         @endif
 
 

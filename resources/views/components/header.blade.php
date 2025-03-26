@@ -20,26 +20,34 @@
             <x-nav-link url="/jobs"  :active="request()-> is('jobs')" >
                 All jobs
             </x-nav-link>
-
+            @auth
             <x-nav-link url="/jobs/saved"  :active="request()-> is('jobs/saved')" >
                 Saved Jobs
-            </x-nav-link>
-            <x-nav-link url="/login"  :active="request()-> is('login')" >
-                Login
-            </x-nav-link>
-            <x-nav-link url="/register"  :active="request()-> is('register')" icon="user" >
-                Login
-            </x-nav-link>
-         
+            </x-nav-link> 
             <x-nav-link url="/dashboard"  :active="request()-> is('dashboard')" icon="box" >
                 Dashboard
             </x-nav-link>
-           
             <x-button-link url="/jobs/create"  icon="edit">
 
-                 Create Job
+                Create Job
 
-            </x-button-link>
+           </x-button-link>
+           <x-logout-button>Logout</x-logout-button>
+           @else
+           <x-nav-link url="/login"  :active="request()-> is('login')" >
+            Login
+        </x-nav-link>
+        <x-nav-link url="/register"  :active="request()-> is('register')" icon="user" >
+            Register
+        </x-nav-link>
+            @endauth
+
+          
+          
+         
+          
+           
+          
 
         
         </nav>
@@ -63,19 +71,30 @@
         All jobs
     </x-nav-link>
 
+
+    @auth
     <x-nav-link url="/jobs/saved" :mobile="true"  :active="request()-> is('jobs/saved')" >
         Saved Jobs
     </x-nav-link>
+  
+    <x-nav-link url="/dashboard" :mobile="true"  :active="request()-> is('dashboard')" >
+        Dashboard
+    </x-nav-link>   
+    <x-logout-button>Logout</x-logout-button>
+    @else
     <x-nav-link url="/login"  :mobile="true" :active="request()-> is('login')" >
         Login
     </x-nav-link>
     <x-nav-link url="/register"  :mobile="true" :active="request()-> is('register')" >
-        Login
+        Register
     </x-nav-link>
+
+    
+    @endauth
+    
+  
  
-    <x-nav-link url="/dashboard" :mobile="true"  :active="request()-> is('dashboard')" >
-        Dashboard
-    </x-nav-link>
+  
 
    
     
@@ -88,3 +107,7 @@
 
 
 </header>
+
+
+
+
