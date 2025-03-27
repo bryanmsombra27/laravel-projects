@@ -22,7 +22,7 @@ class LoginController extends Controller
             if(Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])){
                 // regenerate session to prevent fixtation attacks
                 $request-> session()->regenerate();
-                return redirect()->intended(route("home.index")) -> with("success","You are now logged in!");
+                return redirect()->intended(route("home")) -> with("success","You are now logged in!");
             }
             // redirect back with errors
             return back()-> withErrors(

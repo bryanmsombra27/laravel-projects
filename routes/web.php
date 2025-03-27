@@ -38,25 +38,36 @@ Route::get('/', function () {
 
 
 // SEPARANDO LA FUNCIONALIDAD  HACIA EL CONTROLADOR
-Route::get("/",[HomeController::class,"index"]) -> name("home.index");
-Route::get("/jobs",[JobController::class,"index"]) -> name("jobs.index");
-Route::get("/jobs/create",[JobController::class,"create"]) -> name("jobs.create");
-Route::post("/jobs",[JobController::class,"store"]) -> name("jobs.store");
+// Route::get("/",[HomeController::class,"index"]) -> name("home.index")->middleware("auth");
+// Route::get("/jobs",[JobController::class,"index"]) -> name("jobs.index");
+// Route::get("/jobs/create",[JobController::class,"create"]) -> name("jobs.create");
+// Route::post("/jobs",[JobController::class,"store"]) -> name("jobs.store");
 
-// COLOCAR LOS PARAMETROS AL FINAL
-Route::get("/jobs/{job}",[JobController::class,"show"]) -> name("jobs.show");
+// // COLOCAR LOS PARAMETROS AL FINAL
+// Route::get("/jobs/{job}",[JobController::class,"show"]) -> name("jobs.show");
 
-Route::get("/jobs/{job}/edit",[JobController::class,"edit"]) -> name("jobs.edit");
+// Route::get("/jobs/{job}/edit",[JobController::class,"edit"]) -> name("jobs.edit");
 
-Route::put("/jobs/{job} ",[JobController::class,"update"]) -> name("jobs.update");
-Route::delete("/jobs/{job} ",[JobController::class,"destroy"]) -> name("jobs.destroy");
+// Route::put("/jobs/{job} ",[JobController::class,"update"]) -> name("jobs.update");
+// Route::delete("/jobs/{job} ",[JobController::class,"destroy"]) -> name("jobs.destroy");
 
 
+Route::get("/",[HomeController::class,"index"])-> name("home");
+Route::resource("jobs",JobController::class)->middleware("auth")->only(["create","edit","update","destroy"]);
 
-Route::get("/register",[RegisterController::class,"register"]) ->name("register");
+Route::resource("jobs",JobController::class)->except(["create","edit","update","destroy"]);
+
+
+// AGRUPANDO RUTAS PARA QUE APLIQUEN UN MISMO MIDDLEWARE EN ESTE CASO EL MIDDLEWARE DE GUEST PARA QUE UN USUARIO UNA VES LOGUEADO NO PUEDA ACCEDER A LAS RUTAS DE LOGIN Y REGISTER A MENOS QUE SE HAYA TERMINADO SU SESION.
+Route::middleware("guest")->group(function(){
+    Route::get("/register",[RegisterController::class,"register"]) ->name("register");
 Route::post("/register",[RegisterController::class,"store"]) ->name("register.store");
 
 Route::get("/login",[LoginController::class,"login"]) ->name("login");
 Route::post("/login",[LoginController::class,"authenticate"]) ->name("login.authenticate");
+});
+
+
+
 
 Route::post("/logout",[LoginController::class,"logout"])->name("logout");

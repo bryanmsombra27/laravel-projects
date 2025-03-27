@@ -7,9 +7,11 @@ use App\Models\Job;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class JobController extends Controller
 {
+    use AuthorizesRequests;
     //
     public function index(){
             // PASANDO VALORES A LA VISTA
@@ -24,7 +26,12 @@ class JobController extends Controller
     }
 
     public function create(){
-            $title = "Available jobs";
+        // check if user is logged in
+        // if(!Auth::check()){
+        //     return redirect()->route("login");
+        // }
+
+       $title = "Available jobs";
 
 //     $jobs = ["Web Developer","Software Engineer","DB Admin","Systems Analyst"];
 //     // return view('jobs.create') ->with("title","OTRA FORMA DE PASAR VARIABLES A LA VISTA");
@@ -67,7 +74,7 @@ class JobController extends Controller
             "company_website" => "nullable|url",
         ]);
         // harcode user id
-        $validatedData["user_id"] = 1;
+        $validatedData["user_id"] =$request->auth()->user()->id;
 
             // Job::create([
             //     'title'=> $validatedData["title"],
@@ -91,11 +98,15 @@ class JobController extends Controller
     }
 
     public function edit(Job $job){
+        $this-> authorize("update",$job);
 
         return view("jobs.edit") -> with("job",$job);
     }
 
     public function update(Request $request, Job $job){
+        // check if user is authorize to update the job
+        $this-> authorize("update",$job);
+
             // AGREGANDO VALIDACIONES
         $validatedData = $request-> validate([
             "title" => "required|string|max:255",
@@ -140,6 +151,8 @@ class JobController extends Controller
     }
 
     public function destroy( Job $job){
+
+        $this-> authorize("delete",$job);
         // $job->destroy();
         if($job->company_logo){
             Storage::delete("public/logos/" . $job->company_logo);
