@@ -19,7 +19,7 @@ class JobController extends Controller
     //     'title'=> "Available jobs"
     // ]);
     $title = "All jobs";
-    $jobs = Job::all();
+    $jobs = Job::paginate(9);
     
     // CUANDO SE UTILIZA EL HELPER compact EL PARAMETRO DE TIPO STRING DEBE COINCIDIR CON EL NOMBRE DE LA VARIABLE QUE SE DESEA  PASAR A LA VISTA
     return view('jobs.index',compact("title","jobs"));
@@ -159,6 +159,12 @@ class JobController extends Controller
         }
 
         $job ->delete();
+        // check if request came from the dashboard
+        if(request()->query("from") == "dashboard"){
+
+            return redirect() -> route("dashboard")-> with("sucess","Job listing deleted successfully!");
+        }
+
 
         return redirect() -> route("jobs.index")-> with("sucess","Job listing deleted successfully!");
     }

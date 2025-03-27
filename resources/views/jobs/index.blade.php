@@ -58,7 +58,7 @@ FORMA DE IMPRIMIR VARIABLES CON PHP PURO
 
     </div>
 
-
-        
+    {{-- pagination --}}
+    {{$jobs->links()}}
 
 </x-layout>
